@@ -18,7 +18,6 @@
             overflow: auto;
         }
 
-        /* Canvas for particles */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -44,7 +43,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* Social Icons Container */
 .social-icons {
     display: flex;
     justify-content: center;
@@ -52,9 +50,8 @@
     margin-top: 10px;
 }
 
-/* Larger Social Icons */
 .social-logo {
-    font-size: 32px; /* Increased size */
+    font-size: 38px;
     color: #e8e8e8;
     transition: transform 0.3s ease, color 0.3s ease;
     text-decoration: none;
@@ -62,11 +59,9 @@
 
 .social-logo:hover {
     transform: scale(1.2);
-    color: #000000; /* Discord color */
+    color: #000000;
 }
 
-
-/* Discord Info Box */
 #discord-info {
     margin-top: 10px;
     padding: 5px;
@@ -74,7 +69,7 @@
     color: #d7d7d7;
     font-size: 0.9rem;
     text-align: center;
-    display: none; /* Hidden by default */
+    display: none;
 }
 
 #discord-info p {
@@ -127,7 +122,6 @@
             flex-direction: column;
         }
 
-        /* Record Player Base */
         .record-player {
             position: relative;
             width: 400px;
@@ -140,14 +134,12 @@
             align-items: center;
         }
 
-        /* Vinyl Container */
         .vinyl-container {
             position: relative;
             width: 300px;
             height: 300px;
         }
 
-        /* Vinyl Animation */
         .vinyl {
             width: 100%;
             height: 100%;
@@ -161,7 +153,6 @@
             overflow: hidden;
         }
 
-        /* Thinner Groove Lines */
         .vinyl::before {
             content: '';
             position: absolute;
@@ -184,10 +175,9 @@
             border-radius: 50%;
             background: radial-gradient(circle, #fff 10%, #ccc 90%);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            border: 5px solid #444; /* Add a small gap */
+            border: 5px solid #444;
         }
 
-        /* Improved Vinyl Arm */
         .vinyl-arm {
             position: absolute;
             top: -1%;
@@ -213,7 +203,6 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
 
-        /* Curved Text */
         .vinyl-text {
             position: absolute;
             width: 100%;
@@ -236,7 +225,6 @@
             text-anchor: middle;
         }
 
-        /* Vinyl Spin Animation */
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -250,7 +238,6 @@
             animation: spin 5s linear infinite;
         }
 
-        /* Smooth Text Behavior */
         .vinyl-text svg {
             transition: transform 0.5s ease-in-out;
         }
@@ -259,7 +246,6 @@
             animation: spin 5s linear infinite;
         }
 
-        /* Game Cards Container */
 .game-cards {
     display: flex;
     flex-wrap: wrap;
@@ -268,7 +254,6 @@
     margin-top: 30px;
 }
 
-/* Individual Game Card */
 .game-card {
     position: relative;
     width: 300px;
@@ -312,7 +297,6 @@
     color: #ccc;
 }
 
-/* 3D Hover Effect */
 .game-card:hover {
     transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -387,7 +371,6 @@
             transform: translateY(0) scale(1);
         }
 
-        /* Updated Styles for Informations Section */
         #info {
             max-width: 800px;
             margin: 0 auto;
@@ -401,7 +384,6 @@
             margin: 20px 0;
         }
 
-        /* Flexbox container for the content creator section */
         .creator-section {
             display: flex;
             align-items: flex-start;
@@ -448,7 +430,6 @@
 </head>
 
 <body>
-    <!-- Canvas for particles -->
     <canvas id="particles-canvas"></canvas>
 
     <nav>
@@ -463,13 +444,9 @@
     </nav>
 
     <div class="container hero">
-        <!-- Record Player Base -->
         <div class="record-player">
-            <!-- Vinyl Container -->
             <div class="vinyl-container">
-                <!-- Vinyl Arm -->
                 <div class="vinyl-arm"></div>
-                <!-- Spinning Vinyl -->
                 <div class="vinyl">
                     <div class="vinyl-text">
                         <svg viewBox="0 0 300 300">
@@ -496,7 +473,6 @@
             My soundtracks are mostly horror/liminal/synthwave themed, but I also produce different other styles such as "epic" and fantasy-sounding music.
         </p>
     
-        <!-- Content Creator Section -->
         <div class="creator-section">
             <div>
                 <p>My first and still continuing today collaboration is with the content creator "Leaf ." on YouTube for his videos about horror stories and video-games like Minecraft, Five Nights at Freddy's, and more. <br><br><br><br><br><br>
@@ -507,7 +483,6 @@
                 <p>
                     If you wish to contact me, you can find me on every platform :
                     <br> <br>
-                    <!-- Social Icons -->
                     <div class="social-icons">
                         <a href="https://www.youtube.com/@enyss" target="_blank" class="social-logo">
                             <i class="fab fa-youtube"></i>
@@ -519,7 +494,6 @@
                             <i class="fab fa-discord"></i>
                         </a>
                     </div>
-                    <!-- Discord Info Box -->
                     <div id="discord-info" class="hidden">
                         <p>Discord: enyss</p>
                         <p>ID: 833665092271996939</p>
@@ -540,7 +514,7 @@
         <p>These are the games I produce for.</p>
 
             <div class="game-cards">
-                <!-- Game Card 1 -->
+                <!-- Game -->
                 <div class="game-card">
                     <img src="BackroomsOfR.webp" alt="Backrooms Of Reality">
                     <div class="game-info">
@@ -549,7 +523,7 @@
                         <div class="visits">1.6M+</div>
                     </div>
                 </div>
-                <!-- Game Card 2 -->
+                <!-- Game 2 -->
                 <div class="game-card">
                     <img src="noFilter.webp" alt="Missing Elvira">
                     <div class="game-info">
@@ -558,7 +532,7 @@
                         <div class="visits">4.2M+</div>
                     </div>
                 </div>
-                <!-- Game Card 3 -->
+                <!-- Game 3 -->
                 <div class="game-card">
                     <img src="ProjUntote.webp" alt="Project Untote">
                     <div class="game-info">
@@ -567,7 +541,7 @@
                         <div class="visits">741.2K+</div>
                     </div>
                 </div>
-                <!-- Game Card 3 -->
+                <!-- Game 4 -->
                 <div class="game-card">
                     <img src="AreaX.webp" alt="Area X">
                     <div class="game-info">
@@ -576,7 +550,7 @@
                         <div class="visits">112.7K+</div>
                     </div>
                 </div>
-                <!-- Game Card 3 -->
+                <!-- Game 5 -->
                 <div class="game-card">
                     <img src="Omneasia.png" alt="Omneasia">
                     <div class="game-info">
@@ -585,7 +559,7 @@
                         <div class="visits">Upcoming</div>
                     </div>
                 </div>
-                <!-- Game Card 3 -->
+                <!-- Game 6 -->
                 <div class="game-card">
                     <img src="CyberLeap.png" alt="CyberLeap">
                     <div class="game-info">
@@ -594,7 +568,6 @@
                         <div class="visits">Upcoming</div>
                     </div>
                 </div>
-                <!-- Add more game cards as needed -->
             </div>
         </div>
 
@@ -609,7 +582,6 @@
     </footer>
 
     <script>
-        // JavaScript for Particle Effects
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -617,7 +589,6 @@
 
         let particlesArray = [];
 
-        // Particle Class
         class Particle {
             constructor(x, y, size, color, speed) {
                 this.x = x;
@@ -644,7 +615,6 @@
             }
         }
 
-        // Initialize particles
         function init() {
             particlesArray = [];
             for (let i = 0; i < 100; i++) {
@@ -657,7 +627,6 @@
             }
         }
 
-        // Animate particles
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particlesArray.length; i++) {
@@ -667,7 +636,6 @@
             requestAnimationFrame(animate);
         }
 
-        // Resize canvas on window resize
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -677,38 +645,33 @@
         init();
         animate();
 
-        // Audio element for the music
-        const audio = new Audio("music.mp3"); // Replace with your music file path
+        const audio = new Audio("music.mp3");
 
-        // Vinyl element
         const vinyl = document.querySelector('.vinyl');
 
-        // Play music on hover
         vinyl.addEventListener('mouseenter', () => {
             audio.play();
         });
 
-        // Pause music when not hovering
         vinyl.addEventListener('mouseleave', () => {
             audio.pause();
-            audio.currentTime = 0; // Reset audio to the start
+            audio.currentTime = 0;
         });
 
         
     </script>
     <script>
-        // JavaScript for 3D Tilt Effect
         const cards = document.querySelectorAll('.game-card');
     
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; // X coordinate within the card
-                const y = e.clientY - rect.top; // Y coordinate within the card
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20; // Adjust tilt sensitivity
-                const rotateY = (centerX - x) / 20; // Adjust tilt sensitivity
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
     
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
             });
@@ -719,7 +682,6 @@
         });
     </script>
     <script>
-        // Toggle Discord Info Box
         const discordLogo = document.getElementById('discord-logo');
         const discordInfo = document.getElementById('discord-info');
     

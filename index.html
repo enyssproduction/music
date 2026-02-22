@@ -246,6 +246,31 @@
             animation: spin 5s linear infinite;
         }
 
+      .audio-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 40px;
+    align-items: center;
+}
+
+.audio-card {
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 15px;
+    width: 500px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.audio-card h3 {
+    margin-bottom: 15px;
+}
+
+audio {
+    width: 100%;
+}
+      
 .game-cards {
     display: flex;
     flex-wrap: wrap;
@@ -437,9 +462,11 @@
             <a href="#"><img src="logoimage.png" alt="Enyss Production"></a>
         </div>
         <div class="nav-links">
-            <a href="#info">Informations</a>
-            <a href="#experience">Experiences</a>
-        </div>
+    <a href="#info">Informations</a>
+    <a href="#experience">Experiences</a>
+    <a href="#movies">Movies</a>
+    <a href="#work">Work Showcase</a>
+</div>
         <div style="flex: 1.2;"></div>
     </nav>
 
@@ -468,10 +495,13 @@
     </div>
 
     <div class="container" id="info">
-        <h2>Informations</h2>
+    <h2>Informations</h2>
+
+    <button class="btn" id="toggleInfo">Show More Details</button>
+
+    <div id="infoContent" style="display: none; margin-top: 30px;">
         <p>Hello! I am Enyss, a dedicated composer and sound designer specializing in creating original soundtracks for video games. <br>
-            My soundtracks are mostly horror/liminal/synthwave themed, but I also produce different other styles such as "epic" and fantasy-sounding music.
-        </p>
+        My soundtracks are mostly horror/liminal/synthwave themed, but I also produce different other styles such as "epic" and fantasy-sounding music.</p>
     
         <div class="creator-section">
             <div>
@@ -506,6 +536,8 @@
                     <p>83.5K Followers 3,508,061 Views</p>
                 </div>
             </div>
+          </div>
+         </div>
         </div>
     </div>
 
@@ -593,6 +625,28 @@
 
     </div>
 
+    <div class="container" id="work">
+    <h2>Work Showcase</h2>
+    <p>Some of my original soundtracks.</p>
+
+    <div class="audio-showcase">
+        
+        <div class="audio-card">
+            <h3>Backrooms Ambient Theme</h3>
+            <audio controls controlsList="nodownload">
+                <source src="audio1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="audio-card">
+            <h3>Horror Atmosphere Track</h3>
+            <audio controls controlsList="nodownload">
+                <source src="audio2.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+    </div>
+</div>
 
     <footer>
         &copy; 2025 Enyss Production - All Rights Reserved.
@@ -716,8 +770,25 @@
             }
         });
     </script>
+
+    <script>
+const toggleBtn = document.getElementById('toggleInfo');
+const infoContent = document.getElementById('infoContent');
+
+toggleBtn.addEventListener('click', () => {
+    if (infoContent.style.display === "none") {
+        infoContent.style.display = "block";
+        toggleBtn.textContent = "Hide Details";
+    } else {
+        infoContent.style.display = "none";
+        toggleBtn.textContent = "Show More Details";
+    }
+});
+</script>
+    
 </body>
 
 </html>
+
 
 

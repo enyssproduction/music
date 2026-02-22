@@ -90,19 +90,21 @@
         }
 
         .nav-links {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin: 0 auto;
-        }
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 0 auto;
+    align-items: center;
+}
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    white-space: nowrap;
+}
 
         .nav-links a:hover {
             color: #a212b5;
@@ -789,6 +791,7 @@ toggleBtn.addEventListener('click', () => {
 </body>
 
 </html>
+
 
 
 

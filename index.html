@@ -144,6 +144,15 @@ nav {
     background: rgba(255,255,255,0.12);
 }
 
+      .nav-links a i {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.nav-links a:hover i {
+    opacity: 1;
+}
+
         .container {
             padding: 100px 20px;
             position: relative;
@@ -500,10 +509,22 @@ audio {
     <nav>
     <div class="nav-wrapper">
         <div class="nav-links">
-            <a href="#info">Informations</a>
-            <a href="#experience">Experiences</a>
-            <a href="#movies">Movies</a>
-            <a href="#work">Work Showcase</a>
+            <a href="#info">
+                <i class="fas fa-circle-info"></i>
+                Informations
+            </a>
+            <a href="#experience">
+                <i class="fas fa-gamepad"></i>
+                Experiences
+            </a>
+            <a href="#movies">
+                <i class="fas fa-film"></i>
+                Movies
+            </a>
+            <a href="#work">
+                <i class="fas fa-music"></i>
+                Work Showcase
+            </a>
         </div>
     </div>
 </nav>

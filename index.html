@@ -293,29 +293,118 @@ nav {
             animation: spin 5s linear infinite;
         }
 
-      .audio-showcase {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 40px;
-    align-items: center;
+      .work-category {
+    margin-top: 50px;
+    font-size: 1.4rem;
+    opacity: 0.8;
 }
 
-.audio-card {
-    background: rgba(0,0,0,0.2);
+/* GRID */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+/* CARD */
+.work-card {
     padding: 20px;
-    border-radius: 25px;
-    width: 500px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    background: rgba(255,255,255,0.05);
     backdrop-filter: blur(15px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    transition: all 0.3s ease;
 }
 
-.audio-card h3 {
-    margin-bottom: 15px;
+/* glow contour style header */
+.work-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(120deg, transparent, #ffffff, transparent);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    opacity: 0;
+    transition: 0.3s;
 }
 
-audio {
-    width: 100%;
+.work-card:hover::before {
+    opacity: 1;
+}
+
+.work-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.08);
+}
+
+/* TEXT */
+.work-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.work-type {
+    font-size: 0.85rem;
+    opacity: 0.5;
+}
+
+/* PLAYER */
+.player {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    background: linear-gradient(135deg, #192C70, #8A2BE2);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8A2BE2, #ffffff);
+    transition: width 0.1s linear;
 }
       
 .game-cards {
@@ -688,29 +777,68 @@ audio {
 
     <div class="container" id="work">
     <h2>Work Showcase</h2>
-    <p>Some of my original soundtracks.</p>
+    <p>Some of my original soundtracks & sound effects.</p>
 
-    <div class="audio-showcase">
-        
-        <div class="audio-card">
-            <h3>"Action Theme"</h3>
-            <audio controls controlsList="nodownload">
-                <source src="situationtheme.mp3" type="audio/mpeg">
-            </audio>
+    <!-- ===== OST ===== -->
+    <h3 class="work-category">🎼 Original Soundtracks</h3>
+    <div class="work-grid">
+
+        <div class="work-card" data-audio="situationtheme.mp3">
+            <div class="work-info">
+                <h4>Action Theme</h4>
+                <span class="work-type">Epic / Action</span>
+            </div>
+            <div class="player">
+                <button class="play-btn"><i class="fas fa-play"></i></button>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="audio-card">
-            <h3>"Warhead Theme"</h3>
-            <audio controls controlsList="nodownload">
-                <source src="warheadtheme.mp3" type="audio/mpeg">
-            </audio>
+        <div class="work-card" data-audio="warheadtheme.mp3">
+            <div class="work-info">
+                <h4>Warhead Theme</h4>
+                <span class="work-type">War / Tension</span>
+            </div>
+            <div class="player">
+                <button class="play-btn"><i class="fas fa-play"></i></button>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="audio-card">
-            <h3>"BERRYBOUNCE"</h3>
-            <audio controls controlsList="nodownload">
-                <source src="berrybounce.mp3" type="audio/mpeg">
-            </audio>
+        <div class="work-card" data-audio="berrybounce.mp3">
+            <div class="work-info">
+                <h4>BERRYBOUNCE</h4>
+                <span class="work-type">Arcade / Fun</span>
+            </div>
+            <div class="player">
+                <button class="play-btn"><i class="fas fa-play"></i></button>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== SFX ===== -->
+    <h3 class="work-category">🔊 Sound Effects</h3>
+    <div class="work-grid">
+
+        <div class="work-card" data-audio="sfx1.mp3">
+            <div class="work-info">
+                <h4>Door Slam</h4>
+                <span class="work-type">Horror / Impact</span>
+            </div>
+            <div class="player">
+                <button class="play-btn"><i class="fas fa-play"></i></button>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -853,6 +981,52 @@ toggleBtn.addEventListener('click', () => {
     }
 });
 </script>
+
+    <script>
+let currentAudio = null;
+
+document.querySelectorAll('.work-card').forEach(card => {
+    const btn = card.querySelector('.play-btn');
+    const progress = card.querySelector('.progress');
+    const bar = card.querySelector('.progress-bar');
+
+    const audio = new Audio(card.dataset.audio);
+
+    btn.addEventListener('click', () => {
+
+        if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            document.querySelectorAll('.play-btn i').forEach(i => i.className = "fas fa-play");
+        }
+
+        if (audio.paused) {
+            audio.play();
+            btn.innerHTML = '<i class="fas fa-pause"></i>';
+            currentAudio = audio;
+        } else {
+            audio.pause();
+            btn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = percent + "%";
+    });
+
+    bar.addEventListener('click', (e) => {
+        const rect = bar.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+    });
+
+    audio.addEventListener('ended', () => {
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+        progress.style.width = "0%";
+    });
+});
+</script>
+
     
 </body>
 

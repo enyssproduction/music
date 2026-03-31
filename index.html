@@ -299,10 +299,9 @@ nav {
     opacity: 0.8;
 }
 
-/* GRID */
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 220px);
+    grid-template-columns: repeat(auto-fit, 220px);
     justify-content: center;
     gap: 20px;
     margin-top: 25px;
@@ -397,6 +396,8 @@ nav {
 
 /* PROGRESS BAR */
 .progress-bar {
+    position: relative;
+    z-index: 2
     flex: 1;
     height: 6px;
     border-radius: 10px;
@@ -1037,22 +1038,47 @@ document.querySelectorAll('.work-card').forEach(card => {
     });
 
     // seek
-    bar.addEventListener('click', (e) => {
-        e.stopPropagation(); // important pour éviter double click
+   bar.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-        const rect = bar.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
+    const rect = bar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percent = clickX / rect.width;
 
-        if (audio.duration) {
-            audio.currentTime = percent * audio.duration;
-        }
-    });
-
+    if (audio.duration) {
+        audio.currentTime = percent * audio.duration;
+    }
+});
+    
     // reset
     audio.addEventListener('ended', () => {
         btn.innerHTML = '<i class="fas fa-play"></i>';
         progress.style.width = "0%";
     });
+
+    let isDragging = false;
+
+bar.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    updateSeek(e);
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) updateSeek(e);
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+function updateSeek(e) {
+    const rect = bar.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+
+    if (audio.duration) {
+        audio.currentTime = Math.max(0, Math.min(1, percent)) * audio.duration;
+    }
+}
 
 });
 </script>

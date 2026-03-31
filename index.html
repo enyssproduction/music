@@ -313,6 +313,7 @@ nav {
     padding: 20px;
     border-radius: 20px;
     position: relative;
+    alignment: center;
     overflow: hidden;
     cursor: pointer;
 
@@ -346,6 +347,10 @@ nav {
     opacity: 1;
 }
 
+      .work-card:active {
+    transform: scale(0.97);
+}
+      
 .work-card:hover {
     transform: translateY(-5px);
     background: rgba(255,255,255,0.08);
@@ -797,6 +802,8 @@ nav {
             </div>
         </div>
 
+        <div class="work-card" data-audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+
         <div class="work-card" data-audio="warheadtheme.mp3">
             <div class="work-info">
                 <h4>Warhead Theme</h4>
@@ -986,6 +993,7 @@ toggleBtn.addEventListener('click', () => {
     
 <script>
 let currentAudio = null;
+let currentBtn = null;
 
 document.querySelectorAll('.work-card').forEach(card => {
 
@@ -993,45 +1001,48 @@ document.querySelectorAll('.work-card').forEach(card => {
     const progress = card.querySelector('.progress');
     const bar = card.querySelector('.progress-bar');
 
-    const audio = new Audio();
-    audio.src = card.dataset.audio;
-    audio.preload = "metadata";
+    const audio = new Audio(card.dataset.audio);
 
-    btn.addEventListener('click', async (e) => {
-        e.stopPropagation();
+    // 👉 CLICK SUR TOUTE LA CARD
+    card.addEventListener('click', async () => {
 
         try {
 
-            // stop autre audio
+            // stop ancien son
             if (currentAudio && currentAudio !== audio) {
                 currentAudio.pause();
-                document.querySelectorAll('.play-btn i')
-                    .forEach(i => i.className = "fas fa-play");
+                if (currentBtn) currentBtn.innerHTML = '<i class="fas fa-play"></i>';
             }
 
+            // play / pause
             if (audio.paused) {
                 await audio.play();
                 btn.innerHTML = '<i class="fas fa-pause"></i>';
                 currentAudio = audio;
+                currentBtn = btn;
             } else {
                 audio.pause();
                 btn.innerHTML = '<i class="fas fa-play"></i>';
             }
 
         } catch (err) {
-            console.error("Audio error:", err);
+            console.error("❌ Audio error:", err);
+            alert("Audio introuvable ou bloqué. Vérifie le chemin du fichier.");
         }
+
     });
 
-    // update progress
+    // barre progression
     audio.addEventListener('timeupdate', () => {
         if (!audio.duration) return;
         const percent = (audio.currentTime / audio.duration) * 100;
         progress.style.width = percent + "%";
     });
 
-    // click sur barre
+    // seek
     bar.addEventListener('click', (e) => {
+        e.stopPropagation(); // important pour éviter double click
+
         const rect = bar.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
 
@@ -1040,7 +1051,7 @@ document.querySelectorAll('.work-card').forEach(card => {
         }
     });
 
-    // reset fin
+    // reset
     audio.addEventListener('ended', () => {
         btn.innerHTML = '<i class="fas fa-play"></i>';
         progress.style.width = "0%";

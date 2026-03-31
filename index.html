@@ -596,7 +596,31 @@ nav {
       .container {
     padding-top: 140px;
 }
-        
+
+      /* ===== MOBILE HEADER FIX ===== */
+@media (max-width: 768px) {
+    
+    nav {
+        top: 10px;
+        width: 100%;
+    }
+
+    .nav-wrapper {
+        transform: scale(0.6); /* réduit à 60% */
+        padding: 6px;
+        gap: 5px;
+    }
+
+    .nav-links a {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
+
+    .nav-links a i {
+        font-size: 10px;
+    }
+}
+      
     </style>
 </head>
 

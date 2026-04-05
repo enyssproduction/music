@@ -9,14 +9,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
         body {
-            margin: 0;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            background: linear-gradient(135deg, #080707, #1c1c1c);
-            color: #e8e8e8;
-            text-align: center;
-            scroll-behavior: smooth;
-            overflow: auto;
-        }
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    background: radial-gradient(circle at 20% 30%, #1a0033, transparent 40%),
+                radial-gradient(circle at 80% 70%, #2a0055, transparent 40%),
+                linear-gradient(135deg, #050505, #0f0f1a);
+
+    color: #e8e8e8;
+    text-align: center;
+    scroll-behavior: smooth;
+    overflow: auto;
+}
+
+      body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+
+    background: radial-gradient(circle, rgba(138,43,226,0.15) 0%, transparent 60%);
+    animation: moveGlow 20s linear infinite;
+
+    z-index: -2;
+}
+
+@keyframes moveGlow {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(10%, 10%); }
+    100% { transform: translate(0,0); }
+}
+
+      body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.6));
+
+    pointer-events: none;
+    z-index: -1;
+}
 
         #particles-canvas {
             position: fixed;
@@ -905,6 +940,8 @@ nav {
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
                 ctx.fill();
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
             }
 
             update() {
@@ -922,9 +959,15 @@ nav {
             for (let i = 0; i < 100; i++) {
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height;
-                const size = Math.random() * 3 + 1;
-                const color = 'rgba(255, 255, 255, 0.3)';
-                const speed = Math.random() * 0.1 + 0.05;
+                const size = Math.random() * 4 + 1.5;
+
+const purple = Math.random() > 0.5;
+
+const color = purple
+    ? 'rgba(138, 43, 226, 0.25)'
+    : 'rgba(255, 255, 255, 0.15)';
+
+const speed = Math.random() * 0.3 + 0.1;
                 particlesArray.push(new Particle(x, y, size, color, speed));
             }
         }

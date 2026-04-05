@@ -698,40 +698,34 @@ nav {
 
       .scroll-arrow {
     margin-top: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-}
-
-.scroll-arrow span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 18px;
-    height: 18px;
-    border-left: 2px solid rgba(255,255,255,0.8);
-    border-bottom: 2px solid rgba(255,255,255,0.8);
-    transform: translate(-50%, -60%) rotate(-45deg);
-    
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px; /* Modifie la taille de la flèche ici */
     transition: all 0.3s ease;
     
-    /* glow subtil */
-    box-shadow:
-        0 0 8px rgba(255,255,255,0.3),
-        0 0 15px rgba(138,43,226,0.4);
+    /* On utilise text-shadow pour que le glow suive parfaitement la flèche */
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.3),
+        0 0 15px rgba(138, 43, 226, 0.4);
 }
 
-/* hover effet Apple clean */
-.scroll-arrow:hover span {
-    transform: translate(-50%, -50%) rotate(-45deg) scale(1.1);
+/* Hover effet Apple clean */
+.scroll-arrow:hover {
+    color: #ffffff;
+    /* Animation de descente au survol */
+    transform: translateY(5px) scale(1.1); 
     
-    box-shadow:
-        0 0 12px rgba(255,255,255,0.6),
-        0 0 25px rgba(138,43,226,0.8),
-        0 0 40px rgba(138,43,226,0.6);
+    text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.6),
+        0 0 25px rgba(138, 43, 226, 0.8),
+        0 0 40px rgba(138, 43, 226, 0.6);
 }
+      
       
     </style>
 </head>
@@ -786,7 +780,7 @@ nav {
     SHAPE A HEARTBEAT.
 </h1>
         <a href="#info" class="scroll-arrow">
-    <span></span>
+    <i class="fas fa-chevron-down"></i>
 </a>
     </div>
 

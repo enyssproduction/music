@@ -63,6 +63,36 @@
             filter: blur(5px);
         }
 
+      .hero-title {
+    font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-weight: 900;
+
+    text-transform: uppercase;
+    letter-spacing: -2px;
+
+    line-height: 1.05;
+    max-width: 1000px;
+
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    background: linear-gradient(180deg, #ffffff, #cfcfcf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-align: center;
+
+          text-shadow:
+        0 0 20px rgba(255,255,255,0.08),
+        0 0 40px rgba(138,43,226,0.15);
+
+          letter-spacing: -3px;
+
+          transform: scaleY(1.1);
+}
+
 
 .social-icons {
     display: flex;
@@ -704,7 +734,9 @@ nav {
                 </div>
             </div>
         </div>
-        <p>Bring the heartbeat of your game through Music.</p>
+        <h1 class="hero-title">
+    BRING THE HEARTBEAT OF YOUR GAME THROUGH MUSIC
+</h1>
         <a href="#info" class="btn">Learn More</a>
     </div>
 

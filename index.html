@@ -695,6 +695,43 @@ nav {
         font-size: 10px;
     }
 }
+
+      .scroll-arrow {
+    margin-top: 40px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.scroll-arrow span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    border-left: 2px solid rgba(255,255,255,0.8);
+    border-bottom: 2px solid rgba(255,255,255,0.8);
+    transform: translate(-50%, -60%) rotate(-45deg);
+    
+    transition: all 0.3s ease;
+    
+    /* glow subtil */
+    box-shadow:
+        0 0 8px rgba(255,255,255,0.3),
+        0 0 15px rgba(138,43,226,0.4);
+}
+
+/* hover effet Apple clean */
+.scroll-arrow:hover span {
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1.1);
+    
+    box-shadow:
+        0 0 12px rgba(255,255,255,0.6),
+        0 0 25px rgba(138,43,226,0.8),
+        0 0 40px rgba(138,43,226,0.6);
+}
       
     </style>
 </head>
@@ -748,7 +785,9 @@ nav {
         <h1 class="hero-title">
     SHAPE A HEARTBEAT.
 </h1>
-        <a href="#info" class="btn">Learn More</a>
+        <a href="#info" class="scroll-arrow">
+    <span></span>
+</a>
     </div>
 
     <br> <br> <br>

@@ -1229,76 +1229,156 @@ nav {
     </footer>
 
     <script>
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
 
-        let particlesArray = [];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-        class Particle {
-            constructor(x, y, size, color, speed) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.color = color;
-                this.speed = speed;
-            }
+let particlesArray = [];
 
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
-            }
+// 👉 Position souris / doigt
+const mouse = {
+    x: null,
+    y: null,
+    radius: 120
+};
 
-            update() {
-                this.y += this.speed;
+// Desktop
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
 
-                if (this.y > canvas.height) {
-                    this.y = 0;
-                    this.x = Math.random() * canvas.width;
+// Mobile
+window.addEventListener('touchmove', (e) => {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+});
+
+// Quand on quitte l’écran
+window.addEventListener('mouseout', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
+class Particle {
+    constructor(x, y, size, baseColor, speed) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.baseColor = baseColor;
+        this.color = baseColor;
+        this.speed = speed;
+
+        // position initiale (pour retour doux)
+        this.baseX = x;
+        this.baseY = y;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+        ctx.fillStyle = this.color;
+        ctx.fill();
+
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = this.color;
+    }
+
+    update() {
+        this.y += this.speed;
+
+        // boucle verticale
+        if (this.y > canvas.height) {
+            this.y = 0;
+            this.x = Math.random() * canvas.width;
+        }
+
+        // 👉 interaction souris
+        if (mouse.x && mouse.y) {
+            let dx = this.x - mouse.x;
+            let dy = this.y - mouse.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius) {
+                // 👉 REPULSION
+                let force = (mouse.radius - distance) / mouse.radius;
+                let directionX = dx / distance;
+                let directionY = dy / distance;
+
+                this.x += directionX * force * 3;
+                this.y += directionY * force * 3;
+
+                // 👉 GLOW + NEON SUBTIL
+                if (this.baseColor.includes('138, 43, 226')) {
+                    this.color = `rgba(180, 120, 255, 0.5)`; // violet + lumineux
+                } else {
+                    this.color = `rgba(255, 255, 255, 0.35)`; // blanc + glow
                 }
+
+                this.size = Math.min(this.size + 0.05, 4.5);
+
+            } else {
+                // retour normal
+                this.resetStyle();
             }
+
+        } else {
+            this.resetStyle();
         }
+    }
 
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const size = Math.random() * 4 + 1.5;
+    resetStyle() {
+        this.color = this.baseColor;
 
-const purple = Math.random() > 0.5;
-
-const color = purple
-    ? 'rgba(138, 43, 226, 0.25)'
-    : 'rgba(255, 255, 255, 0.15)';
-
-const speed = Math.random() * 0.3 + 0.1;
-                particlesArray.push(new Particle(x, y, size, color, speed));
-            }
+        if (this.size > 1.5) {
+            this.size -= 0.02;
         }
+    }
+}
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
+function init() {
+    particlesArray = [];
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
-        });
+    for (let i = 0; i < 100; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 4 + 1.5;
 
-        init();
-        animate();
+        const purple = Math.random() > 0.5;
+
+        const color = purple
+            ? 'rgba(138, 43, 226, 0.25)'
+            : 'rgba(255, 255, 255, 0.15)';
+
+        const speed = Math.random() * 0.3 + 0.1;
+
+        particlesArray.push(new Particle(x, y, size, color, speed));
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
+init();
+animate();
+
 
         const audio = new Audio("music.mp3");
 

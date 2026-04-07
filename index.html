@@ -680,6 +680,43 @@ nav {
     padding-top: 140px;
 }
 
+      .info-badges {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.info-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px 25px;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.info-badge i {
+    font-size: 18px;
+    color: #be63f2;
+}
+
+.info-badge:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.08);
+}
+      
       /* ===== MOBILE HEADER FIX ===== */
 @media (max-width: 768px) {
     
@@ -822,6 +859,18 @@ nav {
         </div>
     </div>
 
+    <div class="info-badges">
+    <div class="info-badge">
+        <i class="fas fa-map-pin"></i>
+        <span>Based in France</span>
+    </div>
+
+    <div class="info-badge">
+        <i class="fas fa-clock"></i>
+        <span>Timezone : CET (Central European Time)</span>
+    </div>
+</div>
+    
     <p>
                     If you wish to contact me, you can find me on every platform :
                     <br> <br>

@@ -1237,112 +1237,104 @@ canvas.height = window.innerHeight;
 
 let particlesArray = [];
 
-// 👉 Position souris / doigt
+// 👉 souris
 const mouse = {
     x: null,
     y: null,
-    radius: 120
+    radius: 140
 };
 
-// Desktop
 window.addEventListener('mousemove', (e) => {
     mouse.x = e.x;
     mouse.y = e.y;
 });
 
-// Mobile
 window.addEventListener('touchmove', (e) => {
     mouse.x = e.touches[0].clientX;
     mouse.y = e.touches[0].clientY;
 });
 
-// Quand on quitte l’écran
 window.addEventListener('mouseout', () => {
     mouse.x = null;
     mouse.y = null;
 });
 
 class Particle {
-    constructor(x, y, size, baseColor, speed) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.baseColor = baseColor;
-        this.color = baseColor;
-        this.speed = speed;
-        this.angle = Math.random() * Math.PI * 2;
-        this.vibrationSpeed = 0.02 + Math.random() * 0.02;
-        this.vibrationAmplitude = 0.3 + Math.random() * 0.5;
+    constructor() {
+        this.reset(true);
+    }
 
-        // position initiale (pour retour doux)
-        this.baseX = x;
-        this.baseY = y;
+    reset(first = false) {
+        this.x = Math.random() * canvas.width;
+        this.y = first ? Math.random() * canvas.height : -10;
+
+        this.size = Math.random() * 3 + 2;
+
+        this.speedY = Math.random() * 0.4 + 0.2;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+
+        this.angle = Math.random() * Math.PI * 2;
+        this.vibrationSpeed = 0.03 + Math.random() * 0.03;
+        this.vibrationAmplitude = 0.6 + Math.random() * 0.8;
+
+        this.isPurple = Math.random() > 0.5;
     }
 
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 
-        ctx.fillStyle = this.color;
-        ctx.fill();
+        // 👉 couleurs néon FIXES (plus jamais fade)
+        if (this.isPurple) {
+            ctx.fillStyle = "rgba(170, 80, 255, 0.9)";
+            ctx.shadowColor = "rgba(170, 80, 255, 1)";
+        } else {
+            ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+            ctx.shadowColor = "rgba(255, 255, 255, 1)";
+        }
 
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 25;
+
+        ctx.fill();
     }
 
     update() {
-        this.y += this.speed;
+        // 👉 mouvement fluide
+        this.y += this.speedY;
+        this.x += this.speedX;
 
-        // boucle verticale
-        if (this.y > canvas.height) {
-            this.y = 0;
-            this.x = Math.random() * canvas.width;
-            // 👉 VIBRATION SUBTILE
-this.angle += this.vibrationSpeed;
+        // 👉 vibration visible (mais propre)
+        this.angle += this.vibrationSpeed;
+        this.x += Math.cos(this.angle) * this.vibrationAmplitude * 0.15;
+        this.y += Math.sin(this.angle) * this.vibrationAmplitude * 0.15;
 
-this.x += Math.cos(this.angle) * this.vibrationAmplitude * 0.1;
-this.y += Math.sin(this.angle) * this.vibrationAmplitude * 0.1;
-        }
-
-        // 👉 interaction souris
+        // 👉 interaction souris (plus punchy)
         if (mouse.x && mouse.y) {
             let dx = this.x - mouse.x;
             let dy = this.y - mouse.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < mouse.radius) {
-                // 👉 REPULSION
                 let force = (mouse.radius - distance) / mouse.radius;
-                let directionX = dx / distance;
-                let directionY = dy / distance;
 
-                this.x += directionX * force * 3;
-                this.y += directionY * force * 3;
+                this.x += (dx / distance) * force * 5;
+                this.y += (dy / distance) * force * 5;
 
-                // 👉 GLOW + NEON SUBTIL
-                if (this.baseColor.includes('138, 43, 226')) {
-                    this.color = `rgba(180, 120, 255, 0.5)`; // violet + lumineux
-                } else {
-                    this.color = `rgba(255, 255, 255, 0.35)`; // blanc + glow
-                }
-
-                this.size = Math.min(this.size + 0.05, 4.5);
-
+                // boost glow
+                this.size = Math.min(this.size + 0.3, 6);
             } else {
-                // retour normal
-                this.resetStyle();
+                // taille stable (pas de disparition)
+                if (this.size > 2) this.size -= 0.05;
             }
-
-        } else {
-            this.resetStyle();
         }
-    }
 
-    resetStyle() {
-        this.color = this.baseColor;
+        // 👉 respawn infini propre
+        if (this.y > canvas.height + 20) {
+            this.reset();
+        }
 
-        if (this.size > 1.5) {
-            this.size -= 0.02;
+        if (this.x < -20 || this.x > canvas.width + 20) {
+            this.reset();
         }
     }
 }
@@ -1350,20 +1342,8 @@ this.y += Math.sin(this.angle) * this.vibrationAmplitude * 0.1;
 function init() {
     particlesArray = [];
 
-    for (let i = 0; i < 100; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const size = Math.random() * 4 + 1.5;
-
-        const purple = Math.random() > 0.5;
-
-        const color = purple
-          ? 'rgba(138, 43, 226, 0.4)'
-          : 'rgba(255, 255, 255, 0.25)';
-
-        const speed = Math.random() * 0.3 + 0.1;
-
-        particlesArray.push(new Particle(x, y, size, color, speed));
+    for (let i = 0; i < 140; i++) { // + dense
+        particlesArray.push(new Particle());
     }
 }
 

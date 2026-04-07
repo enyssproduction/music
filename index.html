@@ -1315,14 +1315,17 @@ class Particle {
             let distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < mouse.radius) {
-                let force = (mouse.radius - distance) / mouse.radius;
+               let force = (mouse.radius - distance) / mouse.radius;
 
-                this.x += (dx / distance) * force * 5;
-                this.y += (dy / distance) * force * 5;
+               // 👉 répulsion beaucoup plus douce
+               const smoothForce = Math.pow(force, 2); // ralentit la montée de force
 
-                // boost glow
-                this.size = Math.min(this.size + 0.3, 6);
-            } else {
+               this.x += (dx / distance) * smoothForce * 1.8;
+               this.y += (dy / distance) * smoothForce * 1.8;
+
+               // croissance plus lente aussi
+               this.size = Math.min(this.size + 0.15, 5.5);
+           } else {
                 // taille stable (pas de disparition)
                 if (this.size > 2) this.size -= 0.05;
             }
